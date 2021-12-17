@@ -1,0 +1,86 @@
+
+<html>
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>软件工程综合实训管理系统</title>
+    <meta name="description" content="软件工程综合实训管理系统">
+    <meta name="keywords" content="软件工程综合实训管理系统">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="plugins/elementui/index.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.css">
+
+
+    <!-- 引入组件库 -->
+    <script src="js/vue.js"></script>
+    <script src="plugins/elementui/index.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <span>
+        {{result}}
+    </span>
+    <br/>
+    <span>
+        {{flag}}
+    </span>
+    <br/>
+    <span>
+        {{message}}
+    </span>
+    <br/>
+    <span>
+        {{data}}
+    </span>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="js/vue.js"></script>
+<script src="plugins/elementui/index.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script type="text/javascript">
+    new Vue({
+        el : '#app',
+        data : {
+            result:null,
+            flag:null,
+            data:null,
+            message:null
+        },
+        created:function(){
+            var s = {id:'2220180665',
+                    password:'123456'};
+            var z = {id:'2220180289',
+                password:'123456'};
+            var t = {id:'20181212',
+                password:'123456'};
+            // axios.post("/user/slogin.do",s).then((res)=>{
+            //     this.result = res;
+            //     this.flag = res.data.flag;
+            //     this.data = res.data.data;
+            //     this.message = res.data.message;
+            //
+            // });
+            axios.get("/team/setTopic.do?id=1").then((res)=>{
+                this.result = res;
+                this.flag = res.data.flag;
+                this.data = res.data.data;
+                this.message = res.data.message;
+            });
+
+        }
+        ,
+        methods : {
+
+
+        }
+    })
+
+</script>
+</html>

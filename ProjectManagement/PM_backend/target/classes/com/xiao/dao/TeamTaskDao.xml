@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.TeamTaskDao" >
+    <select id="findByTIdAndTId" parameterType="com.xiao.pojo.TeamTask" resultType="com.xiao.pojo.TeamTask">
+        select * from team_task where teamId=#{teamId} and taskId=#{taskId}
+    </select>
+    <delete id="delete" parameterType="com.xiao.pojo.TeamTask">
+        delete from team_task where teamId=#{teamId} and taskId=#{taskId}
+    </delete>
+    <insert id="add" parameterType="com.xiao.pojo.TeamTask">
+        insert into team_task(teamId,taskId,state,remark,score) values(#{teamId},#{taskId},#{state},#{remark},#{score})
+    </insert>
+    <update id="update" parameterType="com.xiao.pojo.TeamTask">
+        update team_task
+        <set>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+        </set>
+        where where teamId=#{teamId} and taskId=#{taskId}
+    </update>
+
+    <delete id="deleteByTeamId" parameterType="String">
+        delete from team_task where teamId=#{teamId}
+    </delete>
+    <delete id="deleteBuTaskId" parameterType="String">
+        delete from team_task where taskId=#{taskId}
+    </delete>
+</mapper>

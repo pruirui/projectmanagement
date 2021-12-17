@@ -1,0 +1,16 @@
+com\xiao\pojo\Notification.class
+com\xiao\constant\MessageConstant.class
+com\xiao\pojo\Student.class
+com\xiao\pojo\Teacher.class
+com\xiao\entity\QueryPageBean.class
+com\xiao\pojo\Invitation.class
+com\xiao\pojo\Topic.class
+com\xiao\utils\DateUtils.class
+com\xiao\pojo\TeamTask.class
+com\xiao\utils\POIUtils.class
+com\xiao\pojo\Team.class
+com\xiao\pojo\Task.class
+com\xiao\pojo\StudentTask.class
+com\xiao\entity\PageResult.class
+com\xiao\pojo\Document.class
+com\xiao\entity\Result.class

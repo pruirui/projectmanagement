@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.TeacherDao" >
+
+    <select id="findById" parameterType="String" resultType="com.xiao.pojo.Teacher">
+        select * from teacher where id=#{id}
+    </select>
+    
+    <insert id="add" parameterType="com.xiao.pojo.Teacher">
+        insert into teacher(id,phone,name,password) values(#{id},#{phone},#{name},#{password})
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+        delete from teacher where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.xiao.pojo.Teacher">
+        update teacher
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="proportion != null">
+                proportion = #{proportion},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

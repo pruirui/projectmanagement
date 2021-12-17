@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.TaskDao" >
+
+    <select id="findAllByTeacherId" parameterType="String" resultType="com.xiao.pojo.Task">
+        select * from task where teacherId=#{teacherId}
+    </select>
+
+    <select id="findById" parameterType="String" resultType="com.xiao.pojo.Task">
+        select  * from task where id=#{id}
+    </select>
+
+    <insert id="add" parameterType="com.xiao.pojo.Task">
+        insert into task(id,teacherId,name,eSTime,deadline,score,fSLimit,remark) values(#{id},#{teacherId},#{name},#{eSTime},#{deadline},#{score},#{fSLimit},#{remark})
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+        delete from task where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.xiao.pojo.Task">
+        update task
+        <set>
+            <if test="teacherId != null">
+                teacherId = #{teacherId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="eSTime != null">
+                eSTime = #{eSTime},
+            </if>
+            <if test="deadline != null">
+                deadline = #{deadline},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="fSLimit != null">
+                fSLimit = #{fSLimit},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findProportion" resultType="Double">
+        select proportion from student_task where studentId=#{studentId,jdbcType=VARCHAR} and taskId=#{taskId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findTeamTask" resultType="com.xiao.pojo.TeamTask">
+        select * from team_task where teamId=#{teamId,jdbcType=VARCHAR} and taskId=#{taskId,jdbcType=VARCHAR}
+    </select>
+</mapper>
