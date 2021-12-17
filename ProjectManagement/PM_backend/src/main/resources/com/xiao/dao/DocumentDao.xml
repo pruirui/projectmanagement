@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.DocumentDao">
+    <select id="findByPath" parameterType="String" resultType="com.xiao.pojo.Document">
+        select * from document where path=#{path};
+    </select>
+    <insert id="add" parameterType="com.xiao.pojo.Document">
+        insert into document(path,filename,uploadTime,remarks,studentId,taskId)
+        values(#{path},#{filename},#{uploadTime},#{remarks},#{studentId},#{taskId})
+    </insert>
+    <delete id="deleteByPath" parameterType="String">
+        delete from document where path=#{path}
+    </delete>
+    <delete id="deleteByStudentId" parameterType="String">
+        delete from document where studentId=#{studentId}
+    </delete>
+    <delete id="deleteByTaskId" parameterType="String">
+        delete from document where taskId=#{taskId}
+    </delete>
+
+</mapper>

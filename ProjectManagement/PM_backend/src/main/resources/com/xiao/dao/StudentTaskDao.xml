@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.StudentTaskDao" >
+    <select id="findBySIdAndTId" resultType="com.xiao.pojo.StudentTask">
+        select * from student_task where studentId=#{studentId,jdbcType=VARCHAR} and taskId=#{taskId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteBySIdAndTId">
+        delete from student_task where studentId=#{studentId,jdbcType=VARCHAR} and taskId=#{taskId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="add" parameterType="com.xiao.pojo.StudentTask">
+        insert into student_task(studentId,taskId,proportion) values(#{studentId},#{taskId},#{proportion})
+    </insert>
+    <delete id="deleteBySId" parameterType="String">
+        delete from student_task where studentId=#{studentId}
+    </delete>
+    <delete id="deleteByTId" parameterType="String">
+        delete from student_task where taskId=#{taskId}
+    </delete>
+</mapper>

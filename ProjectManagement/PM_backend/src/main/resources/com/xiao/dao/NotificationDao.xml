@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.NotificationDao" >
+
+    <select id="findById" parameterType="int" resultType="com.xiao.pojo.Notification">
+        select * from notification where id=#{id}
+    </select>
+    
+    <insert id="add" parameterType="com.xiao.pojo.Notification">
+        insert into notification(remark,teacherId,time,title) values(#{remark},#{teacherId},#{time},#{title})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from notification where id=#{id}
+    </delete>
+
+    <select id="findByTeacherId" parameterType="String" resultType="com.xiao.pojo.Notification">
+        select * from notification where teacherId=#{teacherId}
+    </select>
+</mapper>

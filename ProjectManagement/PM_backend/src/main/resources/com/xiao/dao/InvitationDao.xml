@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.InvitationDao" >
+    <select id="findInvitationListByStudentEdId" parameterType="String" resultType="com.xiao.pojo.Student">
+        select student.* from student,invitation where iedId=#{iedId} and student.id=iId
+    </select>
+    <select id="findInvitationListByStudentId" parameterType="String" resultType="com.xiao.pojo.Student">
+        select student.* from student,invitation where iId=#{iId} and student.id=ieId
+    </select>
+</mapper>

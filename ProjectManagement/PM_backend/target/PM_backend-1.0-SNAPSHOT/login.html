@@ -1,0 +1,102 @@
+
+<html>
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>软件工程综合实训管理系统</title>
+    <meta name="description" content="软件工程综合实训管理系统">
+    <meta name="keywords" content="软件工程综合实训管理系统">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="plugins/elementui/index.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/login1.css">
+
+
+    <!-- 引入组件库 -->
+    <script src="js/vue.js"></script>
+    <script src="plugins/elementui/index.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+
+</head>
+<body>
+
+<div class="login-box" id="app" >
+    <el-form ref="form" :model="sizeForm">
+        <p style="text-align: center"><em ><img src="img/maritimeMark.png"></em></p>
+        <el-form-item label="账号：">
+            <el-input type="text" id="name" v-model="sizeForm.id" style="width: 325px" placeholder="请输入学号或者工号" />
+        </el-form-item>
+        <el-form-item label="密码：">
+            <el-input type="password" id="password" v-model="sizeForm.password" style="width: 325px" placeholder="请输入密码"/>
+        </el-form-item>
+        <el-form-item label=" 身份：">
+            <el-radio-group v-model="sizeForm.type" size="medium">
+                <el-radio border label="学生" ></el-radio>
+                <el-radio border label="老师" ></el-radio>
+            </el-radio-group>
+        </el-form-item>
+
+        <p><el-button id="login" v-on:click="check" style="width:100%" type="primary">登录</el-button></p>
+        <div id="login_control">
+            <p><a id="register_btn_show" href="register.jsp">没有账号,点击注册</a></p>
+        </div>
+
+    </el-form>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="js/vue.js"></script>
+<script src="plugins/elementui/index.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script type="text/javascript">
+    new Vue({
+        el : '#app',
+        data : {
+            sizeForm: {
+                id : '',
+                password : '',
+                type:0
+            }
+        },
+        methods : {
+            check : function(event){
+                //获取值
+                var id = this.sizeForm.id;
+                var password = this.sizeForm.password;
+                var type = this.sizeForm.type;
+                if(id == '' || password == '' || type==0){
+                    this.$message({
+                        message : '账号或密码或身份为空！',
+                        type : 'error'
+                    })
+                    return;
+                }else{
+                    var t = null;
+                    if(type == "学生"){
+                        t = 1;
+                    }else{
+                        t = 0;
+                    }
+                    console.log({id:id,password:password,type:t});
+                    axios.post("/user/tlogin.do",{id:id,password:password}).then((res)=>{
+                        if(res.data.flag){
+                            this.$message({
+                                type: 'success',
+                                message: res.data.message
+                            });
+                        }else{
+                            this.$message.error(res.data.message);
+                        }
+                    })
+                }
+
+            }
+        }
+    })
+
+</script>
+</html>

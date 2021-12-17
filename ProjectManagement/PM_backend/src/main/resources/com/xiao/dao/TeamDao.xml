@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiao.dao.TeamDao" >
+
+    <select id="findById" parameterType="String" resultType="com.xiao.pojo.Team">
+        select * from team where id=#{id}
+    </select>
+    
+    <insert id="add" parameterType="com.xiao.pojo.Team">
+        insert into team(id,name,teacherId,number) values(#{id},#{name},#{teacherId},#{number})
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+        delete from team where id=#{id}
+    </delete>
+
+    <select id="findAllByTeacherId" parameterType="String" resultType="com.xiao.pojo.Team">
+        select * from team where teacherId=#{teacherId}
+    </select>
+    
+    <resultMap id="findDetailsByIdResultMap" type="com.xiao.pojo.Team">
+        <id column="id" property="id"></id>
+        <result column="teacherId" property="teacherId"/>
+        <result column="topic" property="topic"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <association property="teacher" javaType="com.xiao.pojo.Teacher" column="teacherId"
+                     select="com.xiao.dao.TeacherDao.findById">
+        </association>
+        <collection property="students"
+                    javaType="ArrayList"
+                    ofType="com.xiao.pojo.Student"
+                    column="id"
+                    select="com.xiao.dao.StudentDao.findStudentsByTeamId">
+
+        </collection>
+    </resultMap>
+    
+    <select id="findDetailsById" parameterType="String" resultMap="findDetailsByIdResultMap">
+        select * from team where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.xiao.pojo.Team">
+        update team
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="teacherId != null">
+                teacherId = #{teacherId},
+            </if>
+            <if test="topic != null">
+                topic = #{topic},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
